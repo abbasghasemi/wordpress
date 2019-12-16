@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/ic_menu"
+        id="@+id/tab_menu"
+        title="@string/menu" />
+    <tab
+        icon="@drawable/ic_turned_not"
+        id="@+id/tab_favorites"
+        title="@string/mark_name" />
+    <tab
+        icon="@drawable/ic_search"
+        id="@+id/tab_search"
+        title="@string/search" />
+    <tab
+        icon="@drawable/ic_storage"
+        id="@+id/tab_categories"
+        title="@string/boxs" />
+
+    <tab
+        icon="@drawable/ic_home"
+        id="@+id/tab_home"
+        title="@string/home" />
+</tabs>

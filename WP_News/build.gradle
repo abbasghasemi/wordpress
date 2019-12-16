@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+def api = '' // YOUR API
+def packageName = "qasemi.abbas.wp"
+def code = 1
+def name = "3.0"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+
+        applicationId packageName
+        versionCode code
+        versionName name
+
+        minSdkVersion 14
+        targetSdkVersion 29
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        buildTypes.each {
+            it.buildConfigField 'String', 'API', '\"' + api + '\"'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    implementation 'com.github.Guilherme-HRamos:Easy-Save:1.2.1'
+    implementation 'com.koushikdutta.async:androidasync:2.2.1'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'ja.burhanrashid52:photoeditor:0.4.0'
+    implementation 'com.roughike:bottom-bar:2.3.1'
+}
+
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}

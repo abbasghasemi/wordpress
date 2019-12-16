@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:background="@color/colorPrimary"
+    android:elevation="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize">
+
+    <ImageView
+        android:id="@+id/button"
+        style="@android:style/MediaButton"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_mic"
+        android:tint="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@id/button"
+        android:background="@null"
+        android:hint="جستجو ... "
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:textColor="@color/toolbarTextColor"
+        android:textColorHint="@color/textColorHint"
+        android:textSize="12dp" />
+
+
+</RelativeLayout><!-- -->
