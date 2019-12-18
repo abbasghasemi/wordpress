@@ -7,10 +7,12 @@
 package qasemi.abbas.wordpress.fragment;
 
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -35,7 +37,7 @@ import qasemi.abbas.wordpress.adapter.PostsAdapter;
 import qasemi.abbas.wordpress.builder.Api;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
-import qasemi.abbas.wordpress.builder.PullRefreshLayout;
+import qasemi.abbas.wordpress.builder.ui.PullRefreshLayout;
 import qasemi.abbas.wordpress.builder.SaveModel;
 import qasemi.abbas.wordpress.builder.TinyData;
 import qasemi.abbas.wordpress.listener.OnClickListener;
@@ -48,15 +50,15 @@ public class ShowCategory extends BaseFragment {
     private PostsAdapter postsAdapter;
     private String status = "";
     private int pages, page = 1;
-    private StaggeredGridLayoutManager linearLayoutManager;
-    private qasemi.abbas.wordpress.builder.PullRefreshLayout pullRefreshLayout;
+    private StaggeredGridLayoutManager gridLayoutManager;
+    private PullRefreshLayout pullRefreshLayout;
     private ProgressBar progressBar;
     private LinearLayout net;
 
     @Override
     public void onCreateView(@NonNull BaseFragment baseFragment, int id) {
-        super.onCreateView(baseFragment, Builder.getItem(R.layout.base_list,R.layout.d_base_list));
-        setTitle(getPost().get("title").toString());
+        super.onCreateView(baseFragment, Builder.getItem(R.layout.base_list, R.layout.d_base_list));
+        setTitle(getDataArguments().get("title").toString());
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +68,7 @@ public class ShowCategory extends BaseFragment {
         progressBar = findViewById(R.id.progressBar);
         pullRefreshLayout = findViewById(R.id.pull);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        linearLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
         TextView check = findViewById(R.id.check);
         net = findViewById(R.id.error_net);
         postsAdapter = new PostsAdapter();
@@ -75,11 +77,11 @@ public class ShowCategory extends BaseFragment {
             @Override
             public void onClick(View view, int position) {
                 BaseFragment baseFragment = new PostView();
-                baseFragment.setPost(postsAdapter.getDate().get(position));
+                baseFragment.addDataArguments(postsAdapter.getDate().get(position));
                 startFragment(baseFragment);
             }
         });
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(postsAdapter);
 
         if (Divider) {
@@ -92,8 +94,8 @@ public class ShowCategory extends BaseFragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0) {
                     int visibleItemCount_posts = recyclerView.getChildCount();
-                    int totalItemCount_posts = linearLayoutManager.getItemCount();
-                    int[] pastVisiblesItems_posts = linearLayoutManager.findFirstVisibleItemPositions(new int[]{0, 0});
+                    int totalItemCount_posts = gridLayoutManager.getItemCount();
+                    int[] pastVisiblesItems_posts = gridLayoutManager.findFirstVisibleItemPositions(new int[]{0, 0});
                     if (!pullRefreshLayout.isLoading()) {
                         if ((visibleItemCount_posts + pastVisiblesItems_posts[0]) >= totalItemCount_posts) {
                             if (pages > page) {
@@ -122,7 +124,7 @@ public class ShowCategory extends BaseFragment {
             public void onRefresh() {
                 pullRefreshLayout.setLoading(true);
                 page = 1;
-                Application.easySave.saveModel("ListCategory_" + getData(), null);
+                Application.easySave.saveModel("ListCategory_" + getArguments().getString("id"), null);
                 postsAdapter.getDate().clear();
                 postsAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.VISIBLE);
@@ -136,7 +138,7 @@ public class ShowCategory extends BaseFragment {
             }
         });
 
-        final SaveModel saveModel = Application.easySave.retrieveModel("ListCategory_" + getData(), SaveModel.class);
+        final SaveModel saveModel = Application.easySave.retrieveModel("ListCategory_" + getArguments().getString("id"), SaveModel.class);
         if (saveModel != null) {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -154,7 +156,7 @@ public class ShowCategory extends BaseFragment {
     }
 
     private void Get() {
-        AsyncHttpPost post = new AsyncHttpPost(Api.getCategoryPosts(getData(), String.valueOf(page)));
+        AsyncHttpPost post = new AsyncHttpPost(Api.getCategoryPosts(getArguments().getString("id"), String.valueOf(page)));
         post.setTimeout(Builder.Timeout * 1000);
         AsyncHttpClient.getDefaultInstance().executeString(
                 post,
@@ -238,9 +240,9 @@ public class ShowCategory extends BaseFragment {
                                         saveModel.hashMapList.addAll(postsAdapter.getDate());
                                         saveModel.pages = pages;
                                         saveModel.page = page;
-                                        Application.easySave.saveModel("ListCategory_" + getData(), saveModel);
+                                        Application.easySave.saveModel("ListCategory_" + getArguments().getString("id"), saveModel);
                                         postsAdapter.notifyDataSetChanged();
-                                        TinyData.getInstanse().putStringCashe("ListCategory_" + getData());
+                                        TinyData.getInstanse().putStringCashe("ListCategory_" + getArguments().getString("id"));
                                     } else {
                                         if (postsAdapter.getDate().isEmpty()) {
                                             net.setVisibility(View.VISIBLE);

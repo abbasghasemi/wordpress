@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
@@ -31,14 +32,14 @@ import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
 import qasemi.abbas.wordpress.builder.SaveModel;
 
 public class PostView extends BaseFragment {
-    ImageView back, image;
-    TextView title_toolbar, author, date;
-    WebView contextWeb, web;
-    NestedScrollView nestedScrollView;
-    RelativeLayout toolbar;
-    boolean isMark, showWeb;
-    View view;
-    ProgressBar progressBar;
+    private ImageView image;
+    private TextView title_toolbar, author, date;
+    private WebView contextWeb, web;
+    private NestedScrollView nestedScrollView;
+    private RelativeLayout toolbar;
+    private boolean isMark, showWeb;
+    private View view;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -47,11 +48,11 @@ public class PostView extends BaseFragment {
 
         init();
 
-        if (getPost().get("url_image").toString().isEmpty()) {
+        if (getDataArguments().get("url_image").toString().isEmpty()) {
             image.setVisibility(View.GONE);
             view.setVisibility(View.VISIBLE);
         } else {
-            Glide.with(getContext()).load(getPost().get("url_image").toString()).into(image);
+            Glide.with(getContext()).load(getDataArguments().get("url_image").toString()).into(image);
             title_toolbar.setVisibility(View.GONE);
             toolbar.setBackgroundColor(0);
             startScroll();
@@ -70,12 +71,12 @@ public class PostView extends BaseFragment {
                     return;
                 }
                 float y = image.getHeight();
-                int x = (int) (i1 * 255 / y);
                 int c = Builder.getItem(getResources().getColor(R.color.colorPrimary),getResources().getColor(R.color.d_colorPrimary));
                 if (i1 <= y) {
                     if (title_toolbar.getVisibility() == View.VISIBLE) {
                         title_toolbar.setVisibility(View.GONE);
                     }
+                    int x = (int) (i1 * 255 / y);
                     toolbar.setBackgroundColor(Color.argb(x, Color.red(c), Color.green(c), Color.blue(c)));
                 } else if (title_toolbar.getVisibility() == View.GONE) {
                     toolbar.setBackgroundColor(c);
@@ -107,9 +108,9 @@ public class PostView extends BaseFragment {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void show() {
-        title_toolbar.setText(getPost().get("title").toString());
-        author.setText(String.format("نویسنده: %s", getPost().get("author").toString()));
-        date.setText(String.format("منتشر شده در: %s", getPost().get("date").toString()));
+        title_toolbar.setText(getDataArguments().get("title").toString());
+        author.setText(String.format("نویسنده: %s", getDataArguments().get("author").toString()));
+        date.setText(String.format("منتشر شده در: %s", getDataArguments().get("date").toString()));
         contextWeb.getSettings().setJavaScriptEnabled(true);
         contextWeb.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         web.getSettings().setJavaScriptEnabled(true);
@@ -171,7 +172,7 @@ public class PostView extends BaseFragment {
                                     "</style>" +
                                     "</head>" +
                                     "<body dir='rtl'>" +
-                                    getPost().get("content").toString() +
+                                    getDataArguments().get("content").toString() +
                                     "</body></html>",
                             "text/html",
                             "UTF-8",
@@ -190,7 +191,7 @@ public class PostView extends BaseFragment {
                         "</style>" +
                         "</head>" +
                         "<body dir='rtl'>" +
-                        getPost().get("content").toString() +
+                        getDataArguments().get("content").toString() +
                         "</body></html>",
                 "text/html",
                 "UTF-8",
@@ -203,13 +204,13 @@ public class PostView extends BaseFragment {
         toolbar = findViewById(R.id.toolbar);
         nestedScrollView = findViewById(R.id.nestedScrollView);
         title_toolbar = findViewById(R.id.title_toolbar);
-        back = findViewById(R.id.back);
+        ImageView back = findViewById(R.id.back);
         image = findViewById(R.id.image);
         author = findViewById(R.id.author);
         date = findViewById(R.id.date);
         web = findViewById(R.id.web);
         contextWeb = findViewById(R.id.contextWeb);
-        showBottomBarPost(true, !getPost().get("comments").toString().equals("[]"), isMark = Builder.hasID(getPost().get("id").toString()));
+        showBottomBarPost(true, !getDataArguments().get("comments").toString().equals("[]"), isMark = Builder.hasID(getDataArguments().get("id").toString()));
     }
 
     @Override
@@ -217,7 +218,7 @@ public class PostView extends BaseFragment {
         Intent intent = new Intent(Intent.ACTION_SEND);
         switch (view.getId()) {
             case R.id.share:
-                intent.putExtra(Intent.EXTRA_TEXT, getPost().get("title").toString() + ":\n" + getPost().get("url").toString());
+                intent.putExtra(Intent.EXTRA_TEXT, getDataArguments().get("title").toString() + ":\n" + getDataArguments().get("url").toString());
                 intent.setType("text/*");
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(Intent.createChooser(intent, "اشتراک ..."));
@@ -228,20 +229,22 @@ public class PostView extends BaseFragment {
                 break;
             case R.id.comments:
                 showBottomBarPost(false);
-                BaseFragment baseFragment = new Comments();
-                baseFragment.setData(getPost().get("comments").toString());
+                Comments baseFragment = new Comments();
+                Bundle bundle = new Bundle();
+                bundle.putString("comments", getDataArguments().get("comments").toString());
+                baseFragment.setArguments(bundle);
                 startFragment(baseFragment);
                 break;
             case R.id.fav:
                 if (isMark) {
                     isMark = false;
                     ((ImageView) view).setImageResource(R.drawable.ic_turned_not);
-                    Builder.removeBookMark(getPost().get("id").toString());
+                    Builder.removeBookMark(getDataArguments().get("id").toString());
                     break;
                 }
                 isMark = true;
                 SaveModel saveModel = new SaveModel();
-                saveModel.hashMapList.add(getPost());
+                saveModel.hashMapList.add(getDataArguments());
                 ((ImageView) view).setImageResource(R.drawable.ic_turned);
                 Builder.addBookMark(saveModel);
                 break;
@@ -251,11 +254,11 @@ public class PostView extends BaseFragment {
                     ((ImageView) view).setColorFilter(Builder.getItem(getResources().getColor(R.color.activeTabColor),getResources().getColor(R.color.d_activeTabColor)));
                     if (web.getUrl() == null) {
                         progressBar.setVisibility(View.VISIBLE);
-                        web.loadUrl(getPost().get("url").toString());
+                        web.loadUrl(getDataArguments().get("url").toString());
                     }
                     web.setVisibility(View.VISIBLE);
                     contextWeb.setVisibility(View.GONE);
-                    if (!getPost().get("url_image").toString().isEmpty()) {
+                    if (!getDataArguments().get("url_image").toString().isEmpty()) {
                         image.setVisibility(View.GONE);
                         this.view.setVisibility(View.VISIBLE);
                         title_toolbar.setVisibility(View.VISIBLE);
@@ -267,7 +270,7 @@ public class PostView extends BaseFragment {
                     ((ImageView) view).setColorFilter(getResources().getColor(R.color.inActiveTabColor));
                     web.setVisibility(View.GONE);
                     contextWeb.setVisibility(View.VISIBLE);
-                    if (!getPost().get("url_image").toString().isEmpty()) {
+                    if (!getDataArguments().get("url_image").toString().isEmpty()) {
                         image.setVisibility(View.VISIBLE);
                         this.view.setVisibility(View.GONE);
                         title_toolbar.setVisibility(View.GONE);
@@ -280,7 +283,7 @@ public class PostView extends BaseFragment {
 
     @Override
     public void onResumeFragment() {
-        showBottomBarPost(true, !getPost().get("comments").toString().equals("[]"), isMark = Builder.hasID(getPost().get("id").toString()));
+        showBottomBarPost(true, !getDataArguments().get("comments").toString().equals("[]"), isMark = Builder.hasID(getDataArguments().get("id").toString()));
         setButtonBarPostStatus(showWeb, isMark);
     }
 }

@@ -148,6 +148,7 @@ public class Builder {
                 activity.getWindow().setNavigationBarColor(Color.BLACK);
             }
         } else {
+            activity.setTheme(R.style.AppTheme);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && activity.getColor(R.color.colorPrimary) == 0xffffffff) {
                 Window window = activity.getWindow();
                 window.getDecorView().setSystemUiVisibility(window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

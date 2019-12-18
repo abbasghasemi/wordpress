@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/d_background">
 
-    <qasemi.abbas.wordpress.builder.ViewPager
+    <qasemi.abbas.wordpress.builder.ui.ViewPager
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

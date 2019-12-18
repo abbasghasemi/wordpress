@@ -4,7 +4,7 @@
  * For The Android Open Source Project
  *
  */
-package qasemi.abbas.wordpress.builder;
+package qasemi.abbas.wordpress.builder.ui;
 
 import android.content.Context;
 import androidx.annotation.NonNull;

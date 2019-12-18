@@ -30,7 +30,7 @@
             android:background="@drawable/back_writer_post_row_main_2"
             android:singleLine="true"
             android:layout_alignParentRight="true"
-            android:text="نویسنده: فرا سورس"
+            android:text="نویسنده: عباس قاسمی"
             android:textColor="#fff"
             android:textSize="8dp" />
 

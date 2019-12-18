@@ -23,7 +23,7 @@ import qasemi.abbas.wordpress.Application;
 import qasemi.abbas.wordpress.R;
 import qasemi.abbas.wordpress.adapter.PostsAdapter;
 import qasemi.abbas.wordpress.builder.Builder;
-import qasemi.abbas.wordpress.builder.PullRefreshLayout;
+import qasemi.abbas.wordpress.builder.ui.PullRefreshLayout;
 import qasemi.abbas.wordpress.builder.SaveModel;
 import qasemi.abbas.wordpress.listener.OnClickListener;
 
@@ -31,8 +31,8 @@ import static qasemi.abbas.wordpress.builder.Builder.Divider;
 
 public class BookMark extends BaseFragment {
 
-    PostsAdapter postsAdapter;
-    LinearLayout error_net;
+    private PostsAdapter postsAdapter;
+    private LinearLayout error_net;
 
     @Override
     public void onCreateView(@NonNull LayoutInflater inflater) {
@@ -46,14 +46,13 @@ public class BookMark extends BaseFragment {
         pullRefreshLayout.setLoading(true);
         postsAdapter = new PostsAdapter();
         RecyclerView recView = findViewById(R.id.recycler_view);
-        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
-        recView.setLayoutManager(gridLayoutManager);
+        recView.setLayoutManager(new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL));
         postsAdapter.setDate(new ArrayList<HashMap<String, Object>>());
         postsAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view, int position) {
-                BaseFragment baseFragment = new PostView();
-                baseFragment.setPost(postsAdapter.getDate().get(position));
+                PostView baseFragment = new PostView();
+                baseFragment.addDataArguments(postsAdapter.getDate().get(position));
                 startFragment(baseFragment);
             }
         });

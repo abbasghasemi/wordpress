@@ -6,6 +6,7 @@
  */
 package qasemi.abbas.wordpress.fragment;
 
+import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,13 +43,12 @@ import static qasemi.abbas.wordpress.builder.Builder.FilterCategory;
 
 
 public class Category extends BaseFragment {
-    String status = "";
-    List<HashMap<String, Object>> hash;
-    ProgressBar progressBar;
-    TextView check;
-    LinearLayout net;
-    RecyclerView recyclerView;
-    CategoryAdaper categoryAdaper;
+    private String status = "";
+    private List<HashMap<String, Object>> hash;
+    private ProgressBar progressBar;
+    private TextView check;
+    private LinearLayout net;
+    private CategoryAdaper categoryAdaper;
 
     @Override
     public void onCreateView(@NonNull LayoutInflater inflater) {
@@ -58,8 +58,8 @@ public class Category extends BaseFragment {
         hash = new ArrayList<>();
         check = findViewById(R.id.check);
         net = findViewById(R.id.error_net);
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         categoryAdaper = new CategoryAdaper();
         recyclerView.setAdapter(categoryAdaper);
         final SaveModel saveModel = Application.easySave.retrieveModel("Category", SaveModel.class);
@@ -190,9 +190,11 @@ public class Category extends BaseFragment {
             holder.title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BaseFragment baseFragment = new ShowCategory();
-                    baseFragment.setPost(hash.get(i));
-                    baseFragment.setData(hash.get(i).get("id").toString());
+                    ShowCategory baseFragment = new ShowCategory();
+                    baseFragment.addDataArguments(hash.get(i));
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",hash.get(i).get("id").toString());
+                    baseFragment.setArguments(bundle);
                     startFragment(baseFragment);
                 }
             });

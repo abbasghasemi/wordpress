@@ -71,7 +71,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:text="نویسنده: فرا سورس"
+                        android:text="نویسنده: عباس قاسمی"
                         android:textColor="@color/textColor"
                         android:textSize="10dp" />
                 </LinearLayout>

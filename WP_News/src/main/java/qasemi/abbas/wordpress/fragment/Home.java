@@ -36,7 +36,7 @@ import qasemi.abbas.wordpress.adapter.PostsAdapter;
 import qasemi.abbas.wordpress.builder.Api;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
-import qasemi.abbas.wordpress.builder.PullRefreshLayout;
+import qasemi.abbas.wordpress.builder.ui.PullRefreshLayout;
 import qasemi.abbas.wordpress.builder.SaveModel;
 import qasemi.abbas.wordpress.builder.TinyData;
 import qasemi.abbas.wordpress.listener.OnClickListener;
@@ -45,21 +45,20 @@ import static qasemi.abbas.wordpress.builder.Builder.Divider;
 import static qasemi.abbas.wordpress.builder.Builder.nameAuthor;
 
 public class Home extends BaseFragment {
-    RecyclerView recView;
-    PostsAdapter postsAdapter;
-    ProgressBar progress;
-    String status = "";
-    TextView check;
-    LinearLayout net;
-    PullRefreshLayout pullRefreshLayout;
+    private PostsAdapter postsAdapter;
+    private ProgressBar progress;
+    private String status = "";
+    private LinearLayout net;
+    private PullRefreshLayout pullRefreshLayout;
     private int pages, page = 1;
+    private StaggeredGridLayoutManager gridLayoutManager;
 
     @Override
     public void onCreateView(@NonNull LayoutInflater inflater) {
         frameLayout.addView(inflater.inflate(Builder.getItem(R.layout.list_main,R.layout.d_list_main), null));
         pullRefreshLayout = findViewById(R.id.pull);
-        recView = findViewById(R.id.recycler_view);
-        check = findViewById(R.id.check);
+        RecyclerView recView = findViewById(R.id.recycler_view);
+        TextView check = findViewById(R.id.check);
         net = findViewById(R.id.error_net);
         progress = findViewById(R.id.progressBar);
         postsAdapter = new PostsAdapter();
@@ -67,12 +66,12 @@ public class Home extends BaseFragment {
         postsAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view, int position) {
-                BaseFragment baseFragment = new PostView();
-                baseFragment.setPost(postsAdapter.getDate().get(position));
+                PostView baseFragment = new PostView();
+                baseFragment.addDataArguments(postsAdapter.getDate().get(position));
                 startFragment(baseFragment);
             }
         });
-        final StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
         recView.setLayoutManager(gridLayoutManager);
         recView.setAdapter(postsAdapter);
         if (Divider) {

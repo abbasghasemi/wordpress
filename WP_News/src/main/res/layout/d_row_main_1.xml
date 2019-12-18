@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="نویسنده: فرا سورس"
+                        android:text="نویسنده: عباس قاسمی"
                         android:textColor="@color/d_textColor"
                         android:textSize="10dp" />
                 </LinearLayout>

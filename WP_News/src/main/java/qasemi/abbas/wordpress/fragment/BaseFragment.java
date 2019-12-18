@@ -36,8 +36,7 @@ public class BaseFragment extends Fragment {
     protected FrameLayout frameLayout;
     private ArrayList<BaseFragment> baseFragments;
     private View view;
-    private HashMap<String, Object> post;
-    private String data;
+    private HashMap<String, Object> hashMap;
     private boolean isShowBottomBarPost;
 
 
@@ -120,20 +119,13 @@ public class BaseFragment extends Fragment {
         return false;
     }
 
-    public HashMap<String, Object> getPost() {
-        return post;
+    public HashMap<String, Object> getDataArguments() {
+        return hashMap;
     }
 
-    public void setPost(HashMap<String, Object> data) {
-        this.post = data;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
+    public void addDataArguments(HashMap<String, Object> data) {
+        this.hashMap = new HashMap<>();
+        this.hashMap.putAll(data);
     }
 
     public void startActivity(Intent intent) {

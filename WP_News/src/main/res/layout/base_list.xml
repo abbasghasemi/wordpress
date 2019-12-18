@@ -31,7 +31,7 @@
             android:textSize="18dp" />
     </RelativeLayout>
 
-    <qasemi.abbas.wordpress.builder.PullRefreshLayout
+    <qasemi.abbas.wordpress.builder.ui.PullRefreshLayout
         android:id="@+id/pull"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </qasemi.abbas.wordpress.builder.PullRefreshLayout>
+    </qasemi.abbas.wordpress.builder.ui.PullRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -7,10 +7,13 @@
 package qasemi.abbas.wordpress.fragment;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -62,8 +65,7 @@ public class Menu extends BaseFragment {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setType("tel/*");
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse("tel:" + Builder.phone));
                     startActivity(intent);
                 } catch (Exception e) {
@@ -89,23 +91,31 @@ public class Menu extends BaseFragment {
         findViewById(R.id.telegram).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(Builder.telegram));
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(Builder.telegram));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getContext(), "هیچ برنامه ای نمی تواند این کار را انجام دهد.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         findViewById(R.id.instagram).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(Builder.instagram));
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(Builder.instagram));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(getContext(), "هیچ برنامه ای نمی تواند این کار را انجام دهد.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         findViewById(R.id.service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getContext(),Builder.getItem(5,4))
+                new AlertDialog.Builder(getContext(), Builder.getItem(5, 4))
                         .setTitle(getString(R.string.app_name))
                         .setMessage(getString(R.string.msg_service))
                         .setNegativeButton("لغو", null)
@@ -126,7 +136,7 @@ public class Menu extends BaseFragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     TinyData.getInstanse().putString("is_dark_theme", "1");
-                }else {
+                } else {
                     TinyData.getInstanse().putString("is_dark_theme", "");
                 }
                 startActivity(new Intent(getContext(), Luancher.class));

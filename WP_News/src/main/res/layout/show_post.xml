@@ -100,7 +100,7 @@
                     android:layout_toRightOf="@id/date"
                     android:layout_weight="1"
                     android:singleLine="true"
-                    android:text="نویسنده: فراسورس"
+                    android:text="نویسنده: عباس قاسمی"
                     android:textColor="#000"
                     android:textSize="14dp" />
 

@@ -43,29 +43,28 @@ import static qasemi.abbas.wordpress.builder.Builder.nameAuthor;
 
 
 public class ListPosts extends BaseFragment {
-    RecyclerView recView;
-    PostsAdapter postsAdapter;
-    ProgressBar progress;
-    String status = "";
-    boolean isLoading;
-    TextView check;
-    LinearLayout net;
+    private PostsAdapter postsAdapter;
+    private ProgressBar progress;
+    private String status = "";
+    private boolean isLoading;
+    private LinearLayout net;
     private int pages, page = 1;
+    private StaggeredGridLayoutManager gridLayoutManager;
 
     @Override
     public void onCreateView(@NonNull BaseFragment baseFragment, int id) {
         super.onCreateView(baseFragment, Builder.getItem(R.layout.base_list,R.layout.d_base_list));
-        setTitle(getData());
+        setTitle(getArguments().getString("date"));
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finishFragment();
             }
         });
-        recView = findViewById(R.id.recycler_view);
+        RecyclerView recView = findViewById(R.id.recycler_view);
         //        title.setText(getResources().getString(R.string.app_name));
         progress = findViewById(R.id.progressBar);
-        check = findViewById(R.id.check);
+        TextView check = findViewById(R.id.check);
         net = findViewById(R.id.error_net);
 
         postsAdapter = new PostsAdapter();
@@ -73,19 +72,19 @@ public class ListPosts extends BaseFragment {
         postsAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view, int position) {
-                BaseFragment baseFragment = new PostView();
-                baseFragment.setPost(postsAdapter.getDate().get(position));
+                PostView baseFragment = new PostView();
+                baseFragment.addDataArguments(postsAdapter.getDate().get(position));
                 startFragment(baseFragment);
             }
         });
-        final StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
         recView.setLayoutManager(gridLayoutManager);
         recView.setAdapter(postsAdapter);
         if (Divider) {
             DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), 1);
             recView.addItemDecoration(itemDecor);
         }
-        SaveModel saveModel = Application.easySave.retrieveModel("ListPosts_" + getData(), SaveModel.class);
+        SaveModel saveModel = Application.easySave.retrieveModel("ListPosts_" + getArguments().getString("date"), SaveModel.class);
         if (saveModel != null) {
             postsAdapter.getDate().addAll(saveModel.hashMapList);
             page = saveModel.page;
@@ -126,7 +125,7 @@ public class ListPosts extends BaseFragment {
     }
 
     private void get() {
-        AsyncHttpPost post = new AsyncHttpPost(Api.getDatePosts(getData(), String.valueOf(page)));
+        AsyncHttpPost post = new AsyncHttpPost(Api.getDatePosts(getArguments().getString("date"), String.valueOf(page)));
         post.setTimeout(Builder.Timeout * 1000);
         AsyncHttpClient.getDefaultInstance().executeString(
                 post,
@@ -209,7 +208,7 @@ public class ListPosts extends BaseFragment {
                                             saveModel.hashMapList.addAll(postsAdapter.getDate());
                                             saveModel.page = page;
                                             saveModel.pages = pages;
-                                            String ss = "ListPosts_" + getData();
+                                            String ss = "ListPosts_" + getArguments().getString("date");
                                             Application.easySave.saveModel(ss, saveModel);
                                             postsAdapter.notifyDataSetChanged();
                                             TinyData.getInstanse().putStringCashe(ss);

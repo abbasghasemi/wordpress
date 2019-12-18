@@ -4,7 +4,7 @@
  * For The Android Open Source Project
  *
  */
-package qasemi.abbas.wordpress.builder;
+package qasemi.abbas.wordpress;
 
 import android.app.Activity;
 
@@ -16,6 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import qasemi.abbas.wordpress.builder.Api;
+import qasemi.abbas.wordpress.builder.Builder;
+import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
 import qasemi.abbas.wordpress.fragment.Search;
 import qasemi.abbas.wordpress.listener.ResultListener;
 

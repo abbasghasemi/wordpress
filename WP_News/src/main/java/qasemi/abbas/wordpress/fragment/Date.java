@@ -6,6 +6,7 @@
  */
 package qasemi.abbas.wordpress.fragment;
 
+import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -37,7 +38,7 @@ import qasemi.abbas.wordpress.R;
 import qasemi.abbas.wordpress.builder.Api;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
-import qasemi.abbas.wordpress.builder.PullRefreshLayout;
+import qasemi.abbas.wordpress.builder.ui.PullRefreshLayout;
 import qasemi.abbas.wordpress.builder.SaveModel;
 import qasemi.abbas.wordpress.builder.TinyData;
 
@@ -48,14 +49,12 @@ import static qasemi.abbas.wordpress.builder.Builder.Divider;
  */
 
 public class Date extends BaseFragment {
-    RecyclerView recView;
-    Adapter_Arshiv adaptor_arshiv;
-    ProgressBar progress;
-    String status = "";
-    List<HashMap<String, Object>> hash;
-    TextView check;
-    PullRefreshLayout pullRefreshLayout;
-    LinearLayout net;
+    private Adapter_Arshiv adaptor_arshiv;
+    private ProgressBar progress;
+    private String status = "";
+    private List<HashMap<String, Object>> hash;
+    private PullRefreshLayout pullRefreshLayout;
+    private LinearLayout net;
 
     @Override
     public void onCreateView(@NonNull BaseFragment baseFragment, int id) {
@@ -68,14 +67,13 @@ public class Date extends BaseFragment {
             }
         });
         pullRefreshLayout = findViewById(R.id.pull);
-        recView = findViewById(R.id.recycler_view);
-        check = findViewById(R.id.check);
+        RecyclerView recView = findViewById(R.id.recycler_view);
+        TextView check = findViewById(R.id.check);
         net = findViewById(R.id.error_net);
         progress = findViewById(R.id.progressBar);
         hash = new ArrayList<>();
         adaptor_arshiv = new Adapter_Arshiv();
-        recView.hasFixedSize();
-        recView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recView.setLayoutManager(new LinearLayoutManager(getContext()));
         recView.setAdapter(adaptor_arshiv);
         if (Divider) {
             DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), 1);
@@ -251,8 +249,10 @@ public class Date extends BaseFragment {
 
             @Override
             public void onClick(View v) {
-                BaseFragment baseFragment = new ListPosts();
-                baseFragment.setData(hash.get(getAdapterPosition()).get("date").toString());
+                ListPosts baseFragment = new ListPosts();
+                Bundle bundle = new Bundle();
+                bundle.putString("date",hash.get(getAdapterPosition()).get("date").toString());
+                baseFragment.setArguments(bundle);
                 startFragment(baseFragment);
             }
         }

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-import qasemi.abbas.wordpress.builder.GetSearch;
+import qasemi.abbas.wordpress.GetSearch;
 import qasemi.abbas.wordpress.R;
 import qasemi.abbas.wordpress.adapter.PostsAdapter;
 import qasemi.abbas.wordpress.builder.Builder;
@@ -52,17 +52,15 @@ import static qasemi.abbas.wordpress.builder.Builder.nameAuthor;
 public class Search extends BaseFragment implements ResultListener {
 
     public static int id;
-    ProgressBar progress;
-    RecyclerView recView;
-    EditText test;
-    PostsAdapter postsAdapter;
-    String searchText;
-    ImageView button;
-    boolean isLoading = true;
-    LinearLayout error_net;
-    ImageView image;
-    TextView txt_error;
+    private ProgressBar progress;
+    private EditText test;
+    private PostsAdapter postsAdapter;
+    private String searchText;
+    private ImageView button;
+    private boolean isLoading = true;
+    private LinearLayout error_net;
     private int pages, page = 1;
+    private StaggeredGridLayoutManager gridLayoutManager;
 
     @Override
     public void onCreateView(@NonNull LayoutInflater layoutInflater) {
@@ -71,8 +69,8 @@ public class Search extends BaseFragment implements ResultListener {
         progress = view.findViewById(R.id.progressBar);
         progress.setVisibility(View.GONE);
         error_net = view.findViewById(R.id.error_net);
-        image = findViewById(R.id.image);
-        txt_error = findViewById(R.id.check);
+//        ImageView image = findViewById(R.id.image);
+//        TextView txt_error = findViewById(R.id.check);
         view.removeView(findViewById(R.id.title));
         layoutInflater.inflate(Builder.getItem(R.layout.search,R.layout.d_search), view);
         test = view.findViewById(R.id.edit_text);
@@ -121,17 +119,17 @@ public class Search extends BaseFragment implements ResultListener {
             }
         });
         postsAdapter = new PostsAdapter();
-        recView = findViewById(R.id.recycler_view);
+        RecyclerView recView = findViewById(R.id.recycler_view);
         postsAdapter.setDate(new ArrayList<HashMap<String, Object>>());
         postsAdapter.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view, int position) {
-                BaseFragment baseFragment = new PostView();
-                baseFragment.setPost(postsAdapter.getDate().get(position));
+                PostView baseFragment = new PostView();
+                baseFragment.addDataArguments(postsAdapter.getDate().get(position));
                 startFragment(baseFragment);
             }
         });
-        final StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
+        gridLayoutManager = new StaggeredGridLayoutManager(Builder.typeShow == 3 ? Builder.getCountPx() : 1, StaggeredGridLayoutManager.VERTICAL);
         recView.setLayoutManager(gridLayoutManager);
         recView.setAdapter(postsAdapter);
         recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -281,7 +279,7 @@ public class Search extends BaseFragment implements ResultListener {
         if (requestCode == 100) {
             if (resultCode == RESULT_OK && null != data) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                if (!result.get(0).equals("")) {
+                if (result!= null && result.size() > 0 && !result.get(0).equals("")) {
                     test.setText(result.get(0));
                     search();
                 }

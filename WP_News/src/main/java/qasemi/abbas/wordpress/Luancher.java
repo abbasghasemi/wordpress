@@ -10,10 +10,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +28,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.util.Date;
 
 import qasemi.abbas.wordpress.builder.Builder;
-import qasemi.abbas.wordpress.builder.ViewPager;
+import qasemi.abbas.wordpress.builder.ui.ViewPager;
 import qasemi.abbas.wordpress.fragment.BaseFragment;
 import qasemi.abbas.wordpress.fragment.BookMark;
 import qasemi.abbas.wordpress.fragment.Category;
@@ -66,11 +68,11 @@ public class Luancher extends AppCompatActivity {
     }
 
     private void init() {
-        setContentView(Builder.getItem(R.layout.main_activity,R.layout.d_main_activity));
+        setContentView(Builder.getItem(R.layout.main_activity, R.layout.d_main_activity));
         baseFragments = new BaseFragment[5];
         viewPager = findViewById(R.id.contentContainer);
         viewPager.setOffscreenPageLimit(4);
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @Override
             public Fragment getItem(int i) {
                 switch (i) {
@@ -114,33 +116,29 @@ public class Luancher extends AppCompatActivity {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int tabId) {
+                int id;
                 switch (tabId) {
                     case R.id.tab_home:
-                        viewPager.setCurrentItem(0);
-                        if (baseFragments[0] != null)
-                            finishListener = baseFragments[0].getFinishFragment();
+                        id = 0;
                         break;
                     case R.id.tab_categories:
-                        viewPager.setCurrentItem(1);
-                        if (baseFragments[1] != null)
-                            finishListener = baseFragments[1].getFinishFragment();
+                        id = 1;
                         break;
                     case R.id.tab_search:
-                        viewPager.setCurrentItem(2);
-                        if (baseFragments[2] != null)
-                            finishListener = baseFragments[2].getFinishFragment();
+                        id = 2;
                         break;
                     case R.id.tab_favorites:
-                        viewPager.setCurrentItem(3);
-                        if (baseFragments[3] != null)
-                            finishListener = baseFragments[3].getFinishFragment();
+                        id = 3;
                         break;
                     case R.id.tab_menu:
-                        viewPager.setCurrentItem(4);
-                        if (baseFragments[4] != null)
-                            finishListener = baseFragments[4].getFinishFragment();
+                        id = 4;
                         break;
+                    default:
+                        throw new RuntimeException("bottomBar:: tabId not found!.");
                 }
+                viewPager.setCurrentItem(id);
+                if (baseFragments[id] != null)
+                    finishListener = baseFragments[id].getFinishFragment();
             }
         });
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
@@ -180,7 +178,7 @@ public class Luancher extends AppCompatActivity {
 
     public void setStatus(boolean showWeb, boolean isMark) {
         if (showWeb) {
-            web.setColorFilter(Builder.getItem(getResources().getColor(R.color.activeTabColor),getResources().getColor(R.color.d_activeTabColor)));
+            web.setColorFilter(Builder.getItem(getResources().getColor(R.color.activeTabColor), getResources().getColor(R.color.d_activeTabColor)));
         }
         if (isMark) {
             fav.setImageResource(R.drawable.ic_turned);

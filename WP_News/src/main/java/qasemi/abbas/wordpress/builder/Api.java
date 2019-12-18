@@ -10,30 +10,37 @@ import qasemi.abbas.wordpress.BuildConfig;
 
 public class Api {
 
+    @Deprecated
     public static String getCategoryPosts(String id, String page) {
         return BuildConfig.API + "/?json=get_category_posts&date_format=" + Builder.formatDate + "&id=" + id + "&count=" + Builder.LimitPage + "&page=" + page;
     }
 
+    @Deprecated
     public static String getCategoryIndex() {
         return BuildConfig.API + "/?json=get_category_index";
     }
 
+    @Deprecated
     public static String getDateIndex() {
         return BuildConfig.API + "/?json=get_date_index";
     }
 
+    @Deprecated
     public static String getSearchResults(String search, String page) {
         return BuildConfig.API + "/?json=get_search_results&date_format=" + Builder.formatDate + "&count=" + Builder.LimitPage + "&search=" + search + "&page=" + page;
     }
 
+    @Deprecated
     public static String getPageIndex() {
         return BuildConfig.API + "/?json=get_page_index&date_format=" + Builder.formatDate;
     }
 
+    @Deprecated
     public static String getPosts(String page) {
         return BuildConfig.API + "/?json=get_posts&date_format=" + Builder.formatDate + "&count=" + Builder.LimitPage + "&page=" + page;
     }
 
+    @Deprecated
     public static String getDatePosts(String date, String page) {
         return BuildConfig.API + "/?json=get_date_posts&date_format=" + Builder.formatDate + "&date=" + date + "&count=" + Builder.LimitPage + "&page=" + page;
     }

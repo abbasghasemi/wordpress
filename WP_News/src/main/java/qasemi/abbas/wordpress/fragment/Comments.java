@@ -27,14 +27,12 @@ import qasemi.abbas.wordpress.R;
 import qasemi.abbas.wordpress.builder.Builder;
 
 public class Comments extends BaseFragment {
-    RecyclerView recView;
-    Adapter_Posts adaptor_post;
     private List<HashMap<String, Object>> hash;
 
     @Override
     public void onCreateView(@NonNull BaseFragment baseFragment, int id) {
         super.onCreateView(baseFragment, Builder.getItem(R.layout.comment_activity, R.layout.d_comment_activity));
-        recView = findViewById(R.id.recycler_comment);
+        RecyclerView recView = findViewById(R.id.recycler_comment);
 
         findViewById(R.id.back_comment).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,13 +42,11 @@ public class Comments extends BaseFragment {
         });
 
         hash = new ArrayList<>();
-        adaptor_post = new Adapter_Posts();
-        recView.hasFixedSize();
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recView.setLayoutManager(linearLayoutManager);
+        Adapter_Posts adaptor_post = new Adapter_Posts();
+        recView.setLayoutManager(new LinearLayoutManager(getContext()));
         recView.setAdapter(adaptor_post);
         try {
-            JSONArray jsonArray = new JSONArray(getData());
+            JSONArray jsonArray = new JSONArray(getArguments().getString("comments"));
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject object = jsonArray.getJSONObject(i);
                 HashMap<String, Object> add = new HashMap<>();
