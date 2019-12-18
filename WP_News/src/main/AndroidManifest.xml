@@ -36,6 +36,7 @@
         <activity
             android:name=".PhotoEdit"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Luancher"
             android:screenOrientation="portrait" />
