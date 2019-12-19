@@ -95,7 +95,7 @@ public class ShowCategory extends BaseFragment {
                 if (dy > 0) {
                     int visibleItemCount_posts = recyclerView.getChildCount();
                     int totalItemCount_posts = gridLayoutManager.getItemCount();
-                    int[] pastVisiblesItems_posts = gridLayoutManager.findFirstVisibleItemPositions(new int[]{0, 0});
+                    int[] pastVisiblesItems_posts = gridLayoutManager.findFirstVisibleItemPositions(new int[gridLayoutManager.getSpanCount()]);
                     if (!pullRefreshLayout.isLoading()) {
                         if ((visibleItemCount_posts + pastVisiblesItems_posts[0]) >= totalItemCount_posts) {
                             if (pages > page) {
