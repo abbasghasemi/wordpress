@@ -1,4 +1,5 @@
 All sections are easily editable.
+
 ![](media/screenshot.gif)
 ## Description
 
