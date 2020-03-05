@@ -6,16 +6,21 @@
  */
 package qasemi.abbas.wordpress;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import br.vince.easysave.EasySave;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.TinyData;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class Application extends android.app.Application {
 
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
+    @SuppressLint("StaticFieldLeak")
     public static EasySave easySave;
 
     @Override
@@ -25,11 +30,13 @@ public class Application extends android.app.Application {
         context = getApplicationContext();
         easySave = new EasySave(context);
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/" + Builder.nameFont + ".ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/" + Builder.nameFont + ".ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         distoryCashe();
     }

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WP_News/WP_News.iml" filepath="$PROJECT_DIR$/WP_News/WP_News.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wp_news.iml" filepath="$PROJECT_DIR$/wp_news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WP_News/WP_News.iml" filepath="$PROJECT_DIR$/WP_News/WP_News.iml" group="wp_news/WP_News" />
+      <module fileurl="file://$PROJECT_DIR$/wp_news.iml" filepath="$PROJECT_DIR$/wp_news.iml" group="wp_news" />
     </modules>
   </component>
 </project>

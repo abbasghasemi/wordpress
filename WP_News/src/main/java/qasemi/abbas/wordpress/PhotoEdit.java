@@ -31,11 +31,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import ja.burhanrashid52.photoeditor.OnSaveBitmap;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
 import qasemi.abbas.wordpress.builder.Builder;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class PhotoEdit extends AppCompatActivity {
 
@@ -60,7 +60,7 @@ public class PhotoEdit extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

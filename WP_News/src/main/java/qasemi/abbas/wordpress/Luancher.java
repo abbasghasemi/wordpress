@@ -27,6 +27,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.Date;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.ui.ViewPager;
 import qasemi.abbas.wordpress.fragment.BaseFragment;
@@ -37,7 +38,6 @@ import qasemi.abbas.wordpress.fragment.Menu;
 import qasemi.abbas.wordpress.fragment.Search;
 import qasemi.abbas.wordpress.listener.FinishListener;
 import qasemi.abbas.wordpress.listener.OnClickListener;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static qasemi.abbas.wordpress.builder.Builder.DoubleClickToExit;
 
@@ -56,7 +56,7 @@ public class Luancher extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

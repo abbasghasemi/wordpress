@@ -13,9 +13,9 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import qasemi.abbas.wordpress.builder.Builder;
 import qasemi.abbas.wordpress.builder.CheckNetworkStatus;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static qasemi.abbas.wordpress.builder.Builder.ShowSplash;
 import static qasemi.abbas.wordpress.builder.Builder.TimeSplash;
@@ -24,7 +24,7 @@ public class Start extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     @Override

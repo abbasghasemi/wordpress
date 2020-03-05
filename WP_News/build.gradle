@@ -7,7 +7,7 @@ def name = "3.0"
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
 
         applicationId packageName
@@ -28,25 +28,26 @@ android {
             it.buildConfigField 'String', 'API', '\"' + api + '\"'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.1')
-
-    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0')
+    testImplementation 'junit:junit:4.13'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
     implementation 'com.github.Guilherme-HRamos:Easy-Save:1.2.1'
     implementation 'com.koushikdutta.async:androidasync:2.2.1'
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'ja.burhanrashid52:photoeditor:0.4.0'
     implementation 'com.roughike:bottom-bar:2.3.1'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
 }
 
 
