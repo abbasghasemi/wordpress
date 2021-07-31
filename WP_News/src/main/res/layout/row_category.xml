@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:textColor="@color/textColor"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,6 +20,6 @@
         android:layout_height="0.5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#e2e2e2" />
+        android:background="@color/dividerColor" />
 
 </RelativeLayout>

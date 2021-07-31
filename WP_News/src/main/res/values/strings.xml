@@ -3,11 +3,10 @@
     <string name="app_name">اپلیکیشن خبری</string>
 
     <!-- other -->
-    <string name="nav_header">abbas qasemi</string>
+    <string name="nav_header">abbas ghasemi</string>
     <string name="box_name">دسته بندی مطالب</string>
     <string name="comment_name">دیدگاه های پست</string>
     <string name="page_name">برگه ها</string>
-    <string name="date_name">آرشیو مطالب</string>
     <string name="mark_name">نشانه ها</string>
     <string name="empty">موردی برای نمایش وجود ندارد.</string>
     <string name="not_found">موردی برای نمایش پیدا نشد!.</string>

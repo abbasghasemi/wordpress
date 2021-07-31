@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar"
+        android:background="@color/backgroundColor" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-4dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:elevation="8dp"
+        android:outlineProvider="bounds"
+        android:visibility="visible"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:menu="@menu/navigation" />
+
+    <LinearLayout
+        android:id="@+id/bottomBarPost"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-4dp"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:outlineProvider="bounds"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/web"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_web"
+            app:tint="@color/inActiveTabColor" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/web"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_turned_not"
+            app:tint="@color/inActiveTabColor" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/comments"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/fav"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_comment"
+            app:tint="@color/inActiveTabColor" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/screen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/comments"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_screen_share"
+            app:tint="@color/inActiveTabColor" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/share"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/screen"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_menu_share"
+            app:tint="@color/inActiveTabColor" />
+
+    </LinearLayout>
+
+</RelativeLayout>

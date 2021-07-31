@@ -3,5 +3,5 @@
     <corners
         android:bottomLeftRadius="5dp"
         android:topLeftRadius="5dp" />
-    <solid android:color="@color/back_writer_post" />
+    <solid android:color="@color/backWriterPost" />
 </shape>

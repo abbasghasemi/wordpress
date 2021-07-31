@@ -16,12 +16,3 @@
 #   public *;
 #}
 
--keepattributes Signature
--keepattributes *Annotation*
--keepattributes EnclosingMethod
--keepclassmembers enum * { *; }
--keep class **.R$* { *; }
--keepnames class * extends android.app.Activity
--dontwarn com.bumptech.glide.**
--keep class com.roughike.bottombar.** { *; }
--dontwarn com.roughike.bottombar.**

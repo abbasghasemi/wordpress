@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--light theme-->
     <color name="colorPrimary">#FFFFFFFF</color>
-    <color name="textColor">#cc000000</color>
-    <color name="toolbarTextColor">#cc000000</color>
-    <color name="textColorHint">#5A5A5A</color>
     <color name="colorPrimaryDark">#1E88E5</color>
-    <color name="activeTabColor">#1E88E5</color>
-
-    <!--dark theme-->
-    <color name="d_colorPrimary">#25292c</color>
-    <color name="d_textColor">#FFFFFF</color>
-    <color name="d_textColor2">#C4C4C4</color>
-    <color name="d_toolbarTextColor">#FFFFFF</color>
-    <color name="d_textColorHint">#FFFFFF</color>
-    <color name="d_colorPrimaryDark">#FFFFFF</color>
-    <color name="d_activeTabColor">#1E88E5</color>
-    <color name="d_background">#ff1d2122</color>
-
-    <!--other-->
+    <color name="colorAccent">#1E88E5</color>
+    <color name="textColor">#cc000000</color>
+    <color name="textColorHint">#5A5A5A</color>
+    <color name="textDefaultColor">#E4E4E4</color>
+    <color name="dividerColor">#e2e2e2</color>
+    <color name="colorSearchBackground">#393939</color>
+    <color name="colorSearchStrokeBackground">#202020</color>
+    <color name="backgroundColor">#fff</color>
+    <color name="cardBackgroundColor">#fff</color>
+    <color name="colorControlHighlight">#ced7db</color>
+    <color name="navigationBarColor">#e2e2e2</color>
+    <color name="statusBarColor">#fff</color>
+    <color name="backWriterPost">@color/colorAccent</color>
     <color name="inActiveTabColor">#B7C2C7</color>
-    <color name="back_writer_post">#CC1E88E5</color>
-    <color name="cardBackgroundColor">#FFFFFF</color>
-    <color name="d_cardBackgroundColor">#262d33</color>
-    <color name="commentBackground">#EFEBE9</color>
-
-    <!-- Don't Change -->
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="white">#ffffff</color>
-
+    <color name="photoEditTabColor">#000</color>
+    <color name="commentDate">#59a70f</color>
 </resources>

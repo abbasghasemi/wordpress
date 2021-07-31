@@ -19,7 +19,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:textColor="#000"
+            android:textColor="@color/textColor"
             android:textSize="14dp"
             android:id="@+id/msg"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="12dp"
-                android:textColor="#59a70f"
+                android:textColor="@color/commentDate"
                 android:textSize="10dp"
                 android:id="@+id/date"
                 android:gravity="right"
@@ -48,4 +48,3 @@
     </LinearLayout>
 
 </LinearLayout>
-    <!-- -->

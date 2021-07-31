@@ -1,23 +1,18 @@
-All sections are easily editable.
+## Description
+Display your ***wordpress*** site as an application.
 
 ![](media/screenshot.gif)
-## Description
 
-Display your WordPress site as an application
-
-## Getting Started
-
-### Dependencies
-
-* Need to install [wp-json-api](https://github.com/dphiffer/wp-json-api) plugin on WordPress site
+## Getting started
 
 ### Setting up
 
-* set/put the api of your site in the build.gradle file that is relatad to the app folder
+0. Support for wordpress version 5.8 and above.
+1. Add your site address in the build.gradle file that is relatad to the WP_News folder
 that is the end.
-* for more changes and personalising go to this path and edit Builder file.
-```qasemi.abbas.wordpress.builder```
+2. For more changes and personalising go to this path and edit BuildApp file ```ghasemi.abbas.wordpress.builder```.
+3. You are ready to compile application.
 
 ## Author & support
-This project was created by Abbas Qasemi.
+This project was created by Abbas Ghasemi.
 > You can help us to keep my open source projects up to date!

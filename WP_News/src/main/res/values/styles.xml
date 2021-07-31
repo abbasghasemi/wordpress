@@ -1,20 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/activeTabColor</item>
-        <item name="colorControlHighlight">#ced7db</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="alertDialogTheme">@style/alertDialogTheme</item>
     </style>
 
-    <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/d_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/d_colorPrimaryDark</item>
-        <item name="colorAccent">@color/d_activeTabColor</item>
-        <item name="colorControlHighlight">#80474747</item>
-        <item name="android:windowFullscreen">true</item>
+    <style name="alertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/colorAccent</item>
     </style>
-</resources><!-- -->
+
+</resources>

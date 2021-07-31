@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#25292c</color>
+    <color name="colorPrimaryDark">#1E2123</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="textColor">#F4F4F4</color>
+    <color name="textColorHint">#E4E4E4</color>
+    <color name="textDefaultColor">#E4E4E4</color>
+    <color name="dividerColor">#40FFFFFF</color>
+    <color name="colorSearchBackground">#393939</color>
+    <color name="colorSearchStrokeBackground">#202020</color>
+    <color name="backgroundColor">#282C30</color>
+    <color name="cardBackgroundColor">#3A3E42</color>
+    <color name="colorControlHighlight">#1AFFFFFF</color>
+    <color name="navigationBarColor">#000</color>
+    <color name="statusBarColor">#1d2122</color>
+    <color name="photoEditTabColor">#B7C2C7</color>
+    <color name="commentDate">#23384C</color>
+</resources>

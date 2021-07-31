@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:layout_alignParentRight="true"
             android:text="نویسنده: عباس قاسمی"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimary"
             android:textSize="8dp" />
 
         <TextView
@@ -48,4 +48,4 @@
             android:textSize="18dp" />
     </RelativeLayout>
 
-</RelativeLayout><!-- -->
+</RelativeLayout>

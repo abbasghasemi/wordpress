@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
@@ -36,7 +36,7 @@
                     android:layout_weight="1"
                     android:gravity="center|center"
                     android:text="تعداد مطالب: 3"
-                    android:textColor="#000000"
+                    android:textColor="@color/textColor"
                     android:textSize="13dp" />
 
                 <TextView
@@ -45,20 +45,20 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="در تاریخ"
-                    android:textColor="#000000"
+                    android:textColor="@color/textColor"
                     android:textSize="13dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgPost"
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_gravity="center|center"
             android:src="@drawable/ic_insert_invitation"
-            android:tint="@color/colorPrimaryDark" />
+            app:tint="@color/colorAccent" />
 
     </LinearLayout>
 
