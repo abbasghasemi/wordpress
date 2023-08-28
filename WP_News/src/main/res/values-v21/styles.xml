@@ -13,6 +13,7 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">?attr/isLightTheme</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">?attr/isLightTheme</item>
         <item name="alertDialogTheme">@style/alertDialogTheme</item>
+        <item name="fontFamily">@font/sans</item>
     </style>
 
     <style name="alertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">

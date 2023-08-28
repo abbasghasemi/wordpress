@@ -1,7 +1,6 @@
 package ghasemi.abbas.wordpress.api;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.toolbox.StringRequest;
@@ -13,8 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 
-import ghasemi.abbas.wordpress.LuancherActivity;
-import ghasemi.abbas.wordpress.builder.BuildApp;
+import ghasemi.abbas.wordpress.ui.MainActivity;
+import ghasemi.abbas.wordpress.BuildApp;
 
 public class ConnectionManager {
 
@@ -55,7 +54,7 @@ public class ConnectionManager {
     }
 
     private void stringRequest(ResultConnection resultConnection) {
-        StringRequest stringRequest = new StringRequest(0, url, response -> LuancherActivity.activity.runOnUiThread(() -> {
+        StringRequest stringRequest = new StringRequest(0, url, response -> MainActivity.activity.runOnUiThread(() -> {
             try {
                 String object = response.trim();
                 if (object.startsWith("{")) {
@@ -65,9 +64,9 @@ public class ConnectionManager {
             } catch (JSONException e) {
                 resultConnection.onFail(e.toString());
             }
-        }), error -> LuancherActivity.activity.runOnUiThread(() -> resultConnection.onFail(error.toString())));
+        }), error -> MainActivity.activity.runOnUiThread(() -> resultConnection.onFail(error.toString())));
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(timeOut, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        KeepRequestQueue.newKeepRequestQueue(LuancherActivity.activity.getApplicationContext()).add(stringRequest);
+        KeepRequestQueue.newKeepRequestQueue(MainActivity.activity.getApplicationContext()).add(stringRequest);
     }
 
 

@@ -10,6 +10,7 @@
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="android:windowFullscreen">true</item>
         <item name="alertDialogTheme">@style/alertDialogTheme</item>
+        <item name="fontFamily">@font/sans</item>
     </style>
 
 

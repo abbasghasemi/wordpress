@@ -8,7 +8,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import ghasemi.abbas.wordpress.builder.Application;
+import ghasemi.abbas.wordpress.Application;
 
 public class CheckNetworkStatus {
 

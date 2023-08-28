@@ -9,10 +9,16 @@
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="android:windowFullscreen">true</item>
         <item name="alertDialogTheme">@style/alertDialogTheme</item>
+        <item name="fontFamily">@font/sans</item>
     </style>
 
     <style name="alertDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
         <item name="colorPrimary">@color/colorAccent</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="@style/Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowBackground">#33000000</item>
+        <item name="android:navigationBarColor">@color/backgroundColor</item>
     </style>
 
 </resources>

@@ -5,7 +5,7 @@
 package ghasemi.abbas.wordpress.api;
 
 import ghasemi.abbas.wordpress.BuildConfig;
-import ghasemi.abbas.wordpress.builder.BuildApp;
+import ghasemi.abbas.wordpress.BuildApp;
 
 public class ApiSeivice {
 
